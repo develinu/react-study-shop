@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { 
   Navbar, Nav, NavDropdown, Container, Form, Button, FormControl, Carousel
 } from 'react-bootstrap'
+import { Link, Route, Switch } from 'react-router-dom'
 
 import ShoesData from './data.js'
 
@@ -50,53 +51,61 @@ function App() {
         </Container>
       </Navbar>
 
-      <Carousel>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://picsum.photos/seed/picsum/200/80"
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://picsum.photos/seed/picsum/200/80"
-            alt="Second slide"
-          />
+      
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://picsum.photos/seed/picsum/200/80"
-            alt="Third slide"
-          />
+      <Route exact path="/">
+        <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://picsum.photos/seed/picsum/200/80"
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://picsum.photos/seed/picsum/200/80"
+              alt="Second slide"
+            />
 
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+            <Carousel.Caption>
+              <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://picsum.photos/seed/picsum/200/80"
+              alt="Third slide"
+            />
 
-      <div className="container">
-        <div className="row">
-          {
-            shoes.map( (_shoes) => {
-              return <Card key={_shoes.id} shoes={_shoes} />  
-            })
-          }
+            <Carousel.Caption>
+              <h3>Third slide label</h3>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+
+        <div className="container">
+          <div className="row">
+            {
+              shoes.map( (_shoes) => {
+                return <Card key={_shoes.id} shoes={_shoes} />  
+              })
+            }
+          </div>
         </div>
-      </div>
+      </Route>
+      
+      <Route path="/detail">
+        
+      </Route>
     </div>
   );
 }
