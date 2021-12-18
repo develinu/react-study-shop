@@ -92,20 +92,25 @@ function App() {
         <div className="row">
           {
             shoes.map( (_shoes) => {
-              return (
-                <div className="col-md-4" key={_shoes.id}>
-                  <img src={`https://codingapple1.github.io/shop/shoes${_shoes.id + 1}.jpg`} width="100%" />
-                  <h4>{ _shoes.title }</h4>
-                  <p>{ _shoes.content } & { _shoes.price }</p>
-                </div>  
-              )
+              return <Card key={_shoes.id} shoes={_shoes} />  
             })
           }
-          
         </div>
       </div>
     </div>
   );
+}
+
+function Card(props) {
+  const { id, title, content, price } = props.shoes
+
+  return (
+    <div className="col-md-4" key={id}>
+      <img src={`https://codingapple1.github.io/shop/shoes${id + 1}.jpg`} width="100%" />
+      <h4> { title }</h4>
+      <p>{ content } & { price }</p>
+    </div> 
+  )
 }
 
 export default App;
