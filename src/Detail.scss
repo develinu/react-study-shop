@@ -1,0 +1,40 @@
+$primary-color: #ff0000;
+
+.red {
+  color: $primary-color;
+}
+
+// div.container {
+//   h4 {
+//     color: blue;
+//   }
+//   p {
+//     color: green;
+//   }
+// }
+@mixin alertStyle() {
+  background: #eeeeee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+.my-alert {
+  @include alertStyle();
+}
+
+.my-alert-red {
+  @extend .my-alert;
+  background: red;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
