@@ -7,6 +7,7 @@ import {
 import { Link, Route, Switch } from 'react-router-dom'
 
 import ShoesData from './data.js'
+import Detail from './Detail'
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+          <Navbar.Brand href="#">Shoes Shop</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -24,8 +25,8 @@ function App() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
+              <Nav.Link> <Link to="/">Home</Link> </Nav.Link>
+              <Nav.Link> <Link to="/detail">Detail</Link> </Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -34,9 +35,6 @@ function App() {
                   Something else here
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="#" disabled>
-                Link
-              </Nav.Link>
             </Nav>
             <Form className="d-flex">
               <FormControl
@@ -52,60 +50,61 @@ function App() {
       </Navbar>
 
       
+			<Switch>
+				<Route exact path="/">
+					<Carousel>
+						<Carousel.Item>
+							<img
+								className="d-block w-100"
+								src="https://picsum.photos/seed/picsum/200/80"
+								alt="First slide"
+							/>
+							<Carousel.Caption>
+								<h3>First slide label</h3>
+								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+						<Carousel.Item>
+							<img
+								className="d-block w-100"
+								src="https://picsum.photos/seed/picsum/200/80"
+								alt="Second slide"
+							/>
 
-      <Route exact path="/">
-        <Carousel>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://picsum.photos/seed/picsum/200/80"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://picsum.photos/seed/picsum/200/80"
-              alt="Second slide"
-            />
+							<Carousel.Caption>
+								<h3>Second slide label</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+						<Carousel.Item>
+							<img
+								className="d-block w-100"
+								src="https://picsum.photos/seed/picsum/200/80"
+								alt="Third slide"
+							/>
 
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://picsum.photos/seed/picsum/200/80"
-              alt="Third slide"
-            />
+							<Carousel.Caption>
+								<h3>Third slide label</h3>
+								<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+							</Carousel.Caption>
+						</Carousel.Item>
+					</Carousel>
 
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-
-        <div className="container">
-          <div className="row">
-            {
-              shoes.map( (_shoes) => {
-                return <Card key={_shoes.id} shoes={_shoes} />  
-              })
-            }
-          </div>
-        </div>
-      </Route>
-      
-      <Route path="/detail">
-        
-      </Route>
+					<div className="container">
+						<div className="row">
+							{
+								shoes.map( (_shoes) => {
+									return <Card key={_shoes.id} shoes={_shoes} />  
+								})
+							}
+						</div>
+					</div>
+				</Route>
+				
+				<Route path="/detail/:id">
+					<Detail shoes={shoes} />
+				</Route>
+			</Switch>
     </div>
   );
 }
