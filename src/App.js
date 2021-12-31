@@ -8,10 +8,13 @@ import { Link, Route, Switch } from 'react-router-dom'
 
 import ShoesData from './data.js'
 import Detail from './Detail'
+import axios from 'axios'
+
 
 function App() {
 
   const [shoes, setShoes] = useState(ShoesData)
+	const [inventory, setInventory] = useState([10, 11, 12])
 
   return (
     <div className="App">
@@ -98,11 +101,29 @@ function App() {
 								})
 							}
 						</div>
+						<button className="btn btn-primary" onClick={()=>{
+
+							// show loading UI
+
+							// axios.post('URL', { id: 'userId', pw: 'password' })
+
+							axios
+								.get('https://codingapple1.github.io/shop/data2.json')
+								.then(resp => {
+									setShoes([...shoes, ...resp.data])
+								})
+								.catch(() => {
+									console.log("failed")
+								})
+								.finally(() => {
+									// hide loading UI
+								})
+						}}>더보기</button>
 					</div>
 				</Route>
 				
 				<Route path="/detail/:id">
-					<Detail shoes={shoes} />
+					<Detail shoes={shoes} inventory={inventory} setInventory={setInventory} />
 				</Route>
 			</Switch>
     </div>
