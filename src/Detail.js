@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import './Detail.scss'
 import styled from 'styled-components'
+import { inventoryContext } from './App'
 
 
 let Box = styled.div`
@@ -13,7 +14,10 @@ let Title = styled.div`
   color: ${props => props.color}
 `
 
-const Detail = ({ shoes, inventory, setInventory }) => {
+const Detail = ({ shoes, setInventory }) => {
+
+  let inventory = useContext(inventoryContext)
+
   let { id } = useParams()
   let history = useHistory()
   const targetShoes = shoes.find(_shoes => _shoes.id === parseInt(id))

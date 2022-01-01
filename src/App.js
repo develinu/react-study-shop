@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { 
   Navbar, Nav, NavDropdown, Container, Form, Button, FormControl, Carousel
 } from 'react-bootstrap'
@@ -9,6 +9,8 @@ import { Link, Route, Switch } from 'react-router-dom'
 import ShoesData from './data.js'
 import Detail from './Detail'
 import axios from 'axios'
+
+export let inventoryContext = React.createContext()
 
 
 function App() {
@@ -94,6 +96,8 @@ function App() {
 					</Carousel>
 
 					<div className="container">
+
+						<inventoryContext.Provider value={inventory}>
 						<div className="row">
 							{
 								shoes.map( (_shoes) => {
@@ -101,7 +105,10 @@ function App() {
 								})
 							}
 						</div>
+						</inventoryContext.Provider>
+
 						<button className="btn btn-primary" onClick={()=>{
+							
 
 							// show loading UI
 
@@ -123,7 +130,9 @@ function App() {
 				</Route>
 				
 				<Route path="/detail/:id">
-					<Detail shoes={shoes} inventory={inventory} setInventory={setInventory} />
+					<inventoryContext.Provider value={inventory}>
+						<Detail shoes={shoes} inventory={inventory} setInventory={setInventory} />
+					</inventoryContext.Provider>
 				</Route>
 			</Switch>
     </div>
@@ -131,6 +140,9 @@ function App() {
 }
 
 function Card(props) {
+
+	let inventory = useContext(inventoryContext)
+
   const { id, title, content, price } = props.shoes
 
   return (
@@ -138,8 +150,17 @@ function Card(props) {
       <img src={`https://codingapple1.github.io/shop/shoes${id + 1}.jpg`} width="100%" />
       <h4> { title }</h4>
       <p>{ content } & { price }</p>
+			<Test />
+
     </div> 
   )
+}
+
+function Test() {
+
+	let inventory = useContext(inventoryContext)
+	
+	return <p> 재고 : {inventory} </p>
 }
 
 export default App;
