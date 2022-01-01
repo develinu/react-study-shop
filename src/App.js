@@ -8,6 +8,7 @@ import { Link, Route, Switch } from 'react-router-dom'
 
 import ShoesData from './data.js'
 import Detail from './Detail'
+import Cart from './Cart'
 import axios from 'axios'
 
 export let inventoryContext = React.createContext()
@@ -133,6 +134,10 @@ function App() {
 					<inventoryContext.Provider value={inventory}>
 						<Detail shoes={shoes} inventory={inventory} setInventory={setInventory} />
 					</inventoryContext.Provider>
+				</Route>
+
+				<Route path="/cart/:cartId">
+						<Cart />
 				</Route>
 			</Switch>
     </div>
