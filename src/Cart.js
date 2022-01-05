@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 
 
-function Cart({ state, dispatch}) {
+function Cart({ state, isAlert, dispatch }) {
   return (
     <div>
       <Table responsive>
@@ -25,6 +25,15 @@ function Cart({ state, dispatch}) {
           }
         </tbody>
       </Table>
+      {
+        isAlert
+        ? <div className="my-alert2">
+            <p> 지금 구하면 신규할인 20% </p>
+            <button onClick={ () => { dispatch({ type: 'close' })} }>닫기</button>
+          </div>
+        : null
+      }
+      
     </div>
   )
 }
@@ -48,8 +57,10 @@ const Item = ({ idx, item, dispatch }) => {
 }
 
 const convertStateToProps = (state => {
+
   return {
-    state: state
+    state: state.reducer,
+    isAlert: state.reducer2
   }
 })
 

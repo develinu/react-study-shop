@@ -6,8 +6,16 @@ import reportWebVitals from './reportWebVitals'
 
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
+const alertDefaultValue = true;
+
+const reducer2 = (state=alertDefaultValue, action) => {
+  if (action.type === "close") {
+    return false
+  }
+  return state
+}
 
 const defaultState = [
   {
@@ -41,7 +49,7 @@ const reducer = (state=defaultState, action) => {
   }
 }
 
-const store = createStore(reducer)
+const store = createStore(combineReducers({ reducer, reducer2 }))
 
 
 ReactDOM.render(
