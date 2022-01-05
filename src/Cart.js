@@ -1,11 +1,15 @@
 import React from 'react'
 import { propTypes } from 'react-bootstrap/esm/Image'
 import Table from 'react-bootstrap/Table'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 
-function Cart({ state, isAlert, dispatch }) {
+function Cart() {
+
+  const { alertReducer, shoesReducer } = useSelector((state) => state)
+  let dispatch = useDispatch()
+
   return (
     <div>
       <Table responsive>
@@ -19,14 +23,14 @@ function Cart({ state, isAlert, dispatch }) {
         </thead>
         <tbody>
           {
-            state.map((item, idx) => {
+            shoesReducer.map((item, idx) => {
               return <Item key={idx} item={item} dispatch={dispatch} />
             })
           }
         </tbody>
       </Table>
       {
-        isAlert
+        alertReducer.isAlert
         ? <div className="my-alert2">
             <p> 지금 구하면 신규할인 20% </p>
             <button onClick={ () => { dispatch({ type: 'close' })} }>닫기</button>
@@ -38,7 +42,7 @@ function Cart({ state, isAlert, dispatch }) {
   )
 }
 
-const Item = ({ idx, item, dispatch }) => {
+const Item = ({ item, dispatch }) => {
   return (
     <tr>
       <td>{item.id}</td>
@@ -56,13 +60,4 @@ const Item = ({ idx, item, dispatch }) => {
   )
 }
 
-const convertStateToProps = (state => {
-
-  return {
-    state: state.reducer,
-    isAlert: state.reducer2
-  }
-})
-
-export default connect(convertStateToProps)(Cart)
-// export default Cart
+export default Cart

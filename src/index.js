@@ -10,7 +10,7 @@ import { createStore, combineReducers } from 'redux'
 
 const alertDefaultValue = true;
 
-const reducer2 = (state=alertDefaultValue, action) => {
+const alertReducer = (state=alertDefaultValue, action) => {
   if (action.type === "close") {
     return false
   }
@@ -35,7 +35,7 @@ const defaultState = [
   }
 ]
 
-const reducer = (state=defaultState, action) => {
+const shoesReducer = (state=defaultState, action) => {
   if ( action.type === 'addItem' ) {
     let _state = [...state]
     _state.push(action.item)
@@ -53,7 +53,7 @@ const reducer = (state=defaultState, action) => {
   }
 }
 
-const store = createStore(combineReducers({ reducer, reducer2 }))
+const store = createStore(combineReducers({ alertReducer, shoesReducer }))
 
 
 ReactDOM.render(
