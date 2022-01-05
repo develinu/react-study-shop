@@ -9,15 +9,39 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 
-const store = createStore(() => {
-  return [
-    {
-      id: 0,
-      name: '멋진 신발',
-      quantity: 2
-    }
-  ]
-})
+const defaultState = [
+  {
+    id: 0,
+    name: '멋진 신발',
+    quantity: 7
+  },
+  {
+    id: 1,
+    name: '좀 더 멋진 신발',
+    quantity: 3
+  },
+  {
+    id: 2,
+    name: '매우 멋진 신발',
+    quantity: 0
+  }
+]
+
+const reducer = (state=defaultState, action) => {
+  if (action.type === "add") {
+    let _state = [...state]
+    _state[action.id].quantity++
+    return _state
+  } else if (action.type === "minus") {
+    let _state = [...state]
+    _state[action.id].quantity--
+    return _state
+  } else {
+    return state
+  }
+}
+
+const store = createStore(reducer)
 
 
 ReactDOM.render(
