@@ -136,7 +136,7 @@ function App() {
 					</inventoryContext.Provider>
 				</Route>
 
-				<Route path="/cart/:cartId">
+				<Route path="/cart">
 						<Cart />
 				</Route>
 			</Switch>

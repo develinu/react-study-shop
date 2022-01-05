@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { inventoryContext } from './App'
 import { Nav } from 'react-bootstrap'
 import { CSSTransition } from 'react-transition-group'
+import { connect } from 'react-redux'
 
 
 let Box = styled.div`
@@ -16,7 +17,7 @@ let Title = styled.div`
   color: ${props => props.color}
 `
 
-const Detail = ({ shoes, setInventory }) => {
+const Detail = ({ shoes, setInventory, dispatch }) => {
 
   let inventory = useContext(inventoryContext)
 
@@ -61,6 +62,17 @@ const Detail = ({ shoes, setInventory }) => {
             let _inventory = [...inventory]
             _inventory[id] -= 1
             setInventory(_inventory)
+            dispatch(
+              { 
+                type: 'addItem', 
+                item: {
+                  id: id,
+                  name: "TEST",
+                  quantity: 10
+                }
+              }
+            )
+            history.push('/cart')
           } }>주문하기</button>
           <button className="btn btn-danger" onClick={() => { history.goBack() }}>뒤로가기</button>
         </div>
@@ -102,4 +114,12 @@ function Inventory({ count }) {
   )
 }
 
-export default Detail;
+const convertStateToProps = (state => {
+
+  return {
+    state: state.reducer,
+    isAlert: state.reducer2
+  }
+})
+
+export default connect(convertStateToProps)(Detail)

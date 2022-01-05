@@ -45,11 +45,11 @@ const Item = ({ idx, item, dispatch }) => {
       <td>{item.name}</td>
       <td>{item.quantity}</td>
       <td>
-        <button onClick={() => { dispatch({ type: 'add', id: item.id }) }}>
-          +
-        </button>
         <button onClick={() => { dispatch({ type: 'minus', id: item.id }) }}>
           -
+        </button>
+        <button onClick={() => { dispatch({ type: 'add', id: item.id }) }}>
+          +
         </button>
       </td>
     </tr>

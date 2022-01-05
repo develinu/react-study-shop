@@ -36,11 +36,15 @@ const defaultState = [
 ]
 
 const reducer = (state=defaultState, action) => {
-  if (action.type === "add") {
+  if ( action.type === 'addItem' ) {
+    let _state = [...state]
+    _state.push(action.item)
+    return _state
+  } else if ( action.type === 'add' ) {
     let _state = [...state]
     _state[action.id].quantity++
     return _state
-  } else if (action.type === "minus") {
+  } else if ( action.type === 'minus' ) {
     let _state = [...state]
     _state[action.id].quantity--
     return _state
